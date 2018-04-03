@@ -8,3 +8,5 @@ Algunos ejemplos y utilidades para el display de 4digitos, 7segmentos TM1637
 
 - Ejemplo en arduino para mostrar el abecedario y algunos simbolos mas
   (dentro de las limitaciones que supone un display de 7 segmentos)
+
+- Termometro de maximas y minimas con salvado de datos en eeprom ante fallas de alimentacion.
