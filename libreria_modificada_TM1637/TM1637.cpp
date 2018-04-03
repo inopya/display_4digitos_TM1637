@@ -72,22 +72,46 @@ void TM1637::writeByte(int8_t wr_data)
   pinMode(Datapin,OUTPUT);
   
 }
-//send start signal to TM1637
+
+////send start signal to TM1637
+//void TM1637::start(void)
+//{
+//  digitalWrite(Clkpin,HIGH);//send start signal to TM1637
+//  digitalWrite(Datapin,HIGH); 
+//  digitalWrite(Datapin,LOW); 
+//  digitalWrite(Clkpin,LOW); 
+//} 
+////End of transmission
+//void TM1637::stop(void)
+//{
+//  digitalWrite(Clkpin,LOW);
+//  digitalWrite(Datapin,LOW);
+//  digitalWrite(Clkpin,HIGH);
+//  digitalWrite(Datapin,HIGH); 
+//}
+
+//send start signal to TM1637 (modificada por Eulogio)
 void TM1637::start(void)
 {
-  digitalWrite(Clkpin,HIGH);//send start signal to TM1637
   digitalWrite(Datapin,HIGH); 
+  digitalWrite(Clkpin,HIGH);
+  delayMicroseconds(5); 
   digitalWrite(Datapin,LOW); 
-  digitalWrite(Clkpin,LOW); 
 } 
-//End of transmission
+
+//End of transmission (modificada por Eulogio)
 void TM1637::stop(void)
 {
   digitalWrite(Clkpin,LOW);
+  delayMicroseconds(5); 
   digitalWrite(Datapin,LOW);
+  delayMicroseconds(5); 
   digitalWrite(Clkpin,HIGH);
+  delayMicroseconds(5);
   digitalWrite(Datapin,HIGH); 
-}
+} 
+
+
 //display function.Write to full-screen.
 void TM1637::display(int8_t DispData[])
 {
