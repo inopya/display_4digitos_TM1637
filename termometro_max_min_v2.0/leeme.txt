@@ -1,1 +1,26 @@
 
+ Termometro patra el control de maximas y minimas (debe ser reseteado manualmente)
+ mediante una pulsacion larga mientras se mustra la temperatura.
+ pulsacion corta (menos de 450 ms)
+ pulsacion larga (mas de  450 ms)
+ 
+ Una pulsacion corta mientras muestra la temperatura ---> pasa a 'mostrar el tiempo' (dias y horas) que lleva en funcionamiento.
+ --->  otra pulsacion corta mientras muestra los tiempos, pasa al modo 'reset de contadores'.
+ Una vez en este menu se pueden resetear lso tiempos y el contador de reinicios mediante una pulsacion larga (mas de medio segundo)
+ 
+ La idea es bajar el exagerado consumo de entre 45-31mA a 5v
+ para que pueda ser autonomo con bateria de movil (reciclada) y placa solar (de juguete).
+ 
+ Para ahorrar energia se pasa al micro a modo 'DORMIDO' de bajo consumo (SLEEP mode)
+ durante ciertos periodos de tiempo y del saldremos mediante el WDT (WATCH DOG TIMER)
+
+ Dorminos al micro durante 128 segundos entre toma de muestras (16x8), pasando 
+ el consumo actual a 7mA en reposo, 14mA tomando muestras, 22mA mostrando datos (display ON),
+ El display permanecera apagado hasta que el usuario use el pulsador que activa una interrupcion
+ para sacar al micro del estado de reposo  y active el display 
+ En ese momento se  muestra la temperatura actual, el minimo y el Maximo 
+
+ Se han programado unos temporizadores para para llevar la cuenta de tiempo de funcionamiento
+ (por supuesto como es con temporizadores no es us sitema muy preciso)
+ 
+ Se ha implemetado tambien un control de reinicios por falta de alimentacion.
