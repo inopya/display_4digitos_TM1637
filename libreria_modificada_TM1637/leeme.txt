@@ -4,3 +4,7 @@
 //    void displaySegments(uint8_t BitAddr,int8_t SegData);
 
 //    que permite direccionar segmentos individuales y bloques de segmentos
+
+03/04/2018
+corregidos los metodos start() y stop() de la libreria TM1637.cpp
+A veces el display se quedaba 'congelado'
