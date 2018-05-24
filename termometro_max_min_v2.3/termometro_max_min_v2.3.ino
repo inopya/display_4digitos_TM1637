@@ -834,12 +834,12 @@ int estado_bateria(byte modo)
     ADMUX = _BV(REFS0) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
   #endif  
  
-  delay(2);                         // pausa para que Vref se estabilice
-  ADCSRA |= _BV(ADSC);              // iniciar medicion
-  while (bit_is_set(ADCSRA,ADSC));  // proceso de medicion propiamente dicho
+  delay(2);                                           // Pausa para que Vref se estabilice
+  ADCSRA |= _BV(ADSC);                                // Iniciar medicion
+  while (bit_is_set(ADCSRA,ADSC));                    // proceso de medicion propiamente dicho
  
-  uint8_t low  = ADCL; // leer ADCL
-  uint8_t high = ADCH; // leer ADCH
+  uint8_t low  = ADCL;                                // lectura del byte menos significativo
+  uint8_t high = ADCH;                                // lectura del byte mas significativo
  
   long lecturaACD = (high<<8) | low;
  
@@ -863,24 +863,24 @@ int estado_bateria(byte modo)
 
 void mostar_estado_bateria()
 {
-  unsigned long temporizador = 0;         //control de tiempos para en display
+  unsigned long temporizador = 0;                     //control de tiempos para en display
   
-  int carga = estado_bateria();           //peticion del estado de la bateria (en %)
-  carga = abs(carga);                     //por seguridad, pero nunca debe devolver un numero negativo
+  int carga = estado_bateria();                       //peticion del estado de la bateria (en %)
+  carga = abs(carga);                                 //por seguridad, pero nunca debe devolver un numero negativo
 
-  int8_t decenas = (carga % 100) / 10 ;   //decenas (del porcentaje)
-  int8_t unidades = carga %10 ;           //unidades (del porcentaje)
-
-  
+  int8_t decenas = (carga % 100) / 10 ;               //decenas (del porcentaje)
+  int8_t unidades = carga %10 ;                       //unidades (del porcentaje)
+ 
   if(carga<=99){ 
-    display_tm1637.display(0, decenas);   //decenas de la cifra de porcentaje
-    display_tm1637.display(1, unidades);  //unidades de la cifra de porcentaje
-    display_tm1637.displaySegments(2, SIMBOLO_NULO); 
+    display_tm1637.display(0, decenas);               //decenas de la cifra de porcentaje
+    display_tm1637.display(1, unidades);              //unidades de la cifra de porcentaje
+    display_tm1637.displaySegments(2, SIMBOLO_NULO);  //caracter blanco/vacio 
     }
-  else{ //si por casualidad el porcentaje es mayor de 99, mostramos '100'
-    display_tm1637.displaySegments(0, SIMBOLO_1);   // 
-    display_tm1637.displaySegments(1, SIMBOLO_0);   //      | --->  100
-    display_tm1637.displaySegments(2, SIMBOLO_0);   //
+  else{ 
+    /* si por casualidad el porcentaje es mayor de 99, mostramos '100' */
+    display_tm1637.displaySegments(0, SIMBOLO_1);     // 
+    display_tm1637.displaySegments(1, SIMBOLO_0);     //      | --->  100
+    display_tm1637.displaySegments(2, SIMBOLO_0);     //
     }
     
   display_tm1637.displaySegments(3, SIMBOLO_PORCENTAJE); // simbolo '%' 
