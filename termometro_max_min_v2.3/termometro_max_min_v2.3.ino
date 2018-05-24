@@ -84,18 +84,18 @@
 // Otras definiciones para pines y variables
 //------------------------------------------------------
 
-#define MEM_POS_horas     6     //posicion de la eeprom para almacenar las horas ON
-#define MEM_POS_dias      7     //posicion de la eeprom para almacenar los dias ON
-#define MEM_POS_reinicios 0     //posiciond e la eeprom para almacenar los datos de cuelgues
+#define MEM_POS_horas       6       //posicion de la eeprom para almacenar las horas ON
+#define MEM_POS_dias        7       //posicion de la eeprom para almacenar los dias ON
+#define MEM_POS_reinicios   0       //posiciond e la eeprom para almacenar los datos de cuelgues
 
-#define MEM_POS_tempe_MIN 8     //posiciond e la eeprom para almacenar los datos de min
-#define MEM_POS_tempe_MAX 9     //posiciond e la eeprom para almacenar los datos de max
+#define MEM_POS_tempe_MIN   8       //posiciond e la eeprom para almacenar los datos de min
+#define MEM_POS_tempe_MAX   9       //posiciond e la eeprom para almacenar los datos de max
 
-#define ERROR_TEMPERATURA 3     //valor que se suma a la lectura de este BMP180
-                                //parece tener una desviacion de -3 grados
+#define ERROR_TEMPERATURA   3       //valor que se suma a la lectura de este BMP180
+                                    //parece tener una desviacion de -3 grados
 
 
-#define PIN_LED 13              //led OnBoard de Arduino UNO
+#define PIN_LED 13                  //led OnBoard de Arduino UNO
 
 #define PIN_PULSADOR_SELECCION 2    //pin para un pulsador tactil (o de otro tipo)
 
@@ -250,7 +250,7 @@ void setup()
                     
   //apagamos el led 'On Board'
   pinMode(13, OUTPUT);                //PIN13 como salida
-  digitalWrite(13, LOW);              //apagar PIN13  DISPLAY_POWER
+  digitalWrite(13, LOW);              //apagar PIN13
 
   sensorBMP180.begin();
   
@@ -274,9 +274,6 @@ void setup()
   
   //recuperar ultimos valores almacenados al reiniciar
   leerEEPROMtempeMaxMin();
-  
-  
-  //display_tm1637.clearDisplay();
   
   leerDatosSensorBMP180();                                //mirar la temperatura actual
   Temperatura = int(Temperatura) + ERROR_TEMPERATURA;     //eliminar decimales y corregir el error del bmp180
@@ -460,7 +457,7 @@ byte leer_Pulsador(byte pin_pulsador)
 
 
 /*mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-//  INTERRUPCIONES
+//  CONTROL DE INTERRUPCIONES 
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm*/
 
 //========================================================
@@ -522,7 +519,7 @@ void mostar_min_max( int cifra)
 {
   /*
    *  OJO el display se enumera de izquierda a derecha (digito 0,1,2,3)
-   * permite el acceso a segmentos individuales atraves 
+   * permite el acceso a segmentos individuales a traves 
    * de la libreria modificada por mi con:  "xxx.displaySegments('Numero de digito','Segmentos a mostrar')"
    * Esta funcion es mostrar los maximos y minimos,
    * Muestras los datos en los tres digitos de la derecha 
@@ -563,17 +560,17 @@ void mostar_cifra_grados( int cifra)
    * Esta version es para escribir al temperatura mostrando el simbolo de º
    */
   int Num = abs(cifra);
-  int8_t unidades = Num %10 ;               //unidades
-  int8_t decenas = (Num % 100) / 10 ;       //decenas
+  int8_t unidades = Num %10 ;                 //unidades
+  int8_t decenas = (Num % 100) / 10 ;         //decenas
   //int8_t centenas = (Num % 1000) / 100 ;    //centenas
   //int8_t millares = Num  / 1000  ;          //unidades de millar
 
 
   if(cifra<0){
-    display_tm1637.displaySegments(0,SIMBOLO_NEGATIVO); //signo -
+    display_tm1637.displaySegments(0,SIMBOLO_NEGATIVO); // signo negativo (-) ...
   }
   else{
-    display_tm1637.displaySegments(0,SIMBOLO_NULO);     //o apagar ese digito
+    display_tm1637.displaySegments(0,SIMBOLO_NULO);     // ... o apagar ese digito
   }
 
   display_tm1637.display(1, decenas);                   //decenas
@@ -641,6 +638,7 @@ void reset_min_max()
 //========================================================
 void reset_info_timer()
 {
+ /* muestra en display  (rc ?)   */
   display_tm1637.displaySegments(0,SIMBOLO_r);          // letra 'r'
   display_tm1637.displaySegments(1,SIMBOLO_c);          // letra 'c'
   display_tm1637.displaySegments(2,SIMBOLO_NULO);       // caracter "vacio/borrado"
@@ -660,7 +658,8 @@ void reset_info_timer()
     EEPROM.write(MEM_POS_reinicios, 0);
     EEPROM.write(MEM_POS_dias, 0);
     EEPROM.write(MEM_POS_horas, 0);
-
+    
+    /* muestra en display  (oooo)   */ 
     display_tm1637.displaySegments(0,SIMBOLO_o);  //letra 'o'
     display_tm1637.displaySegments(1,SIMBOLO_o);  
     display_tm1637.displaySegments(2,SIMBOLO_o);
