@@ -1,14 +1,12 @@
- ##########################################################
- # ****************************************************** #
- # *             DOMOTICA PARA PRINCIPIANTES            * #
- # *       Termometro de max y min de bajo consumo      * #
- # *       (basado  en el termometro max-min v2.0)      * #
- # *            Autor: Eulogio López Cayuela            * #
- # *                                                    * #
- # *          Versión 2.3    Fecha: 07/04/2018          * #
- # ****************************************************** #
- ##########################################################
 
+****************************************************** 
+*             DOMOTICA PARA PRINCIPIANTES            * 
+*       Termometro de max y min de bajo consumo      * 
+*       (basado  en el termometro max-min v2.0)      * 
+*            Autor: Eulogio López Cayuela            * 
+*                                                    * 
+*          Versión 2.3    Fecha: 07/04/2018          * 
+******************************************************
 
 
  ===== NOTAS IMPORTANTES / OPCIONES DISPONIBLES ===== 
